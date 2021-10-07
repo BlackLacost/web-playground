@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>Список текущих cookies</h3>
+    <ul id="listId"></ul>
+
+    <form action="/" method="POST">
+      <input type="text" name="key" placeholder="Key cookie" />
+      <input type="text" name="value" placeholder="Value cookie" />
+      <input
+        type="number"
+        name="seconds"
+        placeholder="Время жизни в секундах"
+      />
+      <button type="submit">Send</button>
+    </form>
+
+    <script>
+      const ul = document.getElementById('listId')
+      const cookies =
+        document.cookie.length > 0
+          ? document.cookie.split(';').map((item) => item.trim().split('='))
+          : null
+      ul.innerHTML = cookies
+        ? cookies.map(([key, value]) => `<li>${key} = ${value}</li>`).join('')
+        : ''
+    </script>
+  </body>
+</html>

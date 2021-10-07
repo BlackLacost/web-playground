@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Samesite</title>
+  </head>
+  <body>
+    <div>
+      <form action="/" method="POST" id="form">
+        <div>
+          <input
+            type="text"
+            name="user"
+            value="blacklacost"
+            placeholder="Input user"
+          />
+        </div>
+        <div>
+          <label for="samesiteStrict">samesite=strict</label>
+          <input
+            type="radio"
+            id="samesiteStrict"
+            name="samesite"
+            value="strict"
+            checked
+          />
+        </div>
+        <div>
+          <label for="samesiteLax">samesite=lax</label>
+          <input type="radio" id="samesiteLax" name="samesite" value="lax" />
+        </div>
+        <div>
+          <label for="samesiteNone">samesite=none</label>
+          <input type="radio" id="samesiteNone" name="samesite" value="none" />
+        </div>
+        <div>
+          <label for="samesiteNull">не указывать samesite</label>
+          <input type="radio" id="samesiteNull" name="samesite" value="null" />
+        </div>
+        <div>
+          <label for="secure">secure</label>
+          <input type="checkbox" id="secure" name="secure" checked />
+          <span>для samesite = none secure обязателен</span>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <button id="delButton">Delete cookies</button>
+    </div>
+    <div>
+      <img src="/img" />
+    </div>
+
+    <script>
+      function delete_cookie(cookie_name) {
+        var cookie_date = new Date() // current date & time
+        cookie_date.setTime(cookie_date.getTime() - 1)
+        document.cookie = cookie_name +=
+          '=; expires=' + cookie_date.toGMTString()
+      }
+
+      const form = document.getElementById('form')
+      const delButton = document.getElementById('delButton')
+
+      if (document.cookie) {
+        form.style.display = 'none'
+        delButton.style.display = 'block'
+      } else {
+        form.style.display = 'block'
+        delButton.style.display = 'none'
+      }
+
+      // btn.addEventListener('click', async () => {
+      //   const response = await fetch('/login', { method: 'POST' })
+      //   console.log(await response.text())
+      //   document.location.reload()
+      // })
+
+      delButton.addEventListener('click', () => {
+        delete_cookie('user')
+        document.location.reload()
+      })
+    </script>
+  </body>
+</html>
