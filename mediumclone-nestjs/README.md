@@ -27,3 +27,11 @@ INSERT INTO tags (name) VALUES ('dragons');
 INSERT INTO tags (name) VALUES ('coffee');
 SELECT * FROM tags;
 ```
+
+Миграции
+
+```
+$ yarn db:drop
+$ yarn db:create <Название миграции, например CreateTags>
+$ yarn db:migrate
+```
